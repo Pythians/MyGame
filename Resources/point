@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"/>
+
+<plist version="1.0">
+    <dict>
+        <key>bezier</key>
+        <dict>
+            <key>one</key>
+            <array>
+                <array>
+                    <real>240.0000000000000000</real>
+                    <integer>0</integer>
+                </array>
+                <array>
+                    <real>960.0000000</real>
+                    <real>160.0000000000000000</real>
+                </array>
+                <array>
+                    <real>600.0000000000000000</real>
+                    <real>640.0000000</real>
+                </array>
+                <array>
+                    <real>628.8000000000000700</real>
+                    <real>640.0000000</real>
+                </array>
+            </array>
+            <key>two</key>
+            <array>
+                <array>
+                    <real>240.0000000000000000</real>
+                    <integer>0</integer>
+                </array>
+                <array>
+                    <real>960.0000000</real>
+                    <real>160.0000000000000000</real>
+                </array>
+                <array>
+                    <real>600.0000000000000000</real>
+                    <real>640.0000000</real>
+                </array>
+                <array>
+                    <real>628.8000000000000700</real>
+                    <real>640.0000000</real>
+                </array>
+            </array>
+        </dict>
+    </dict>
+</plist>
