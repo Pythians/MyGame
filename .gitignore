@@ -1,11 +1,11 @@
 ## Project Ignoer
 
 # System-generated hidden files
-.*.h
-.*.cpp
-.*.jpg
-.*.png
-.*.tff
+._*.h
+._*.cpp
+._*.jpg
+._*.png
+._*.tff
 # Engine code, platform engineering
 cocos2d/
 proj.android/
