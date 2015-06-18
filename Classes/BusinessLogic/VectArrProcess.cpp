@@ -201,8 +201,14 @@ int VectArr::Intersection( Vect p1, Vect p2, Vect p3, Vect p4, Vect & Out )
 	}
 
 	float ymax1 = p1.y, ymin1 = p2.y, ymax2 = p3.y, ymin2 = p4.y;
-	ymax1 < ymin1 ? swap( ymax1, ymin1 ) : 0;
-	ymax2 < ymin2 ? swap( ymax2, ymin2 ) : 0;
+    if ( ymax1 < ymin1 )
+    {
+        swap( ymax1, ymin1 );
+    }
+    if ( ymax2 < ymin2 )
+    {
+        swap( ymax2, ymin2 );
+    }
 	if( p1.x > p4.x || p2.x < p3.x || ymax1 < ymin2 || ymin1 > ymax2 )
 	{
 		return 0;
@@ -284,11 +290,23 @@ bool VectArr::isMixVec( const cocos2d::Vec2 & l1, const cocos2d::Vec2 & l2,
 						const cocos2d::Vec2 & r1, const cocos2d::Vec2 & r2 )
 {
 	float xmax1 = l1.x, xmin1 = l2.x, xmax2 = r1.x, xmin2 = r2.x;
-	xmax1 < xmin1 ? swap( xmax1, xmin1 ) : 0;
-	xmax2 < xmin2 ? swap( xmax2, xmin2 ) : 0;
-	float ymax1 = l1.y, ymin1 = l2.y, ymax2 = r1.y, ymin2 = r2.y;
-	ymax1 < ymin1 ? swap( ymax1, ymin1 ) : 0;
-	ymax2 < ymin2 ? swap( ymax2, ymin2 ) : 0;
+    if ( xmax1 < xmin1 )
+    {
+        swap( xmax1, xmin1 );
+    }
+    if ( xmax2 < xmin2 )
+    {
+        swap( xmax2, xmin2 );
+    }
+    float ymax1 = l1.y, ymin1 = l2.y, ymax2 = r1.y, ymin2 = r2.y;
+    if ( ymax1 < ymin1 )
+    {
+        swap( ymax1, ymin1 );
+    }
+    if ( ymax2 < ymin2 )
+    {
+        swap( ymax2, ymin2 );
+    }
 	if( xmax1 < xmin2 || xmin1 > xmax2 || ymax1 < ymin2 || ymin1 > ymax2 )
 	{
 		return false;
@@ -446,7 +464,10 @@ void VectArr::offsetVects( const Vect & offset )
 
 void VectArr::offsetVects( unsigned int begin, unsigned int end, const Vect & offset )
 {
-	begin > end ? swap( begin, end ) : 0;
+	if( begin > end )
+    {
+        swap( begin, end );
+    }
 	for( unsigned int i = begin; i < end; i++ )
 	{
 		_lines[ i ] += offset;

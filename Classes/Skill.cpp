@@ -1,4 +1,5 @@
 ﻿#include "Skill.h"
+#include "Layer/Particle.h"
 
 SkillSprite::SkillSprite( )
 	: _action( nullptr )
@@ -52,7 +53,7 @@ bool SkillSprite::initWithSkillType( SkillType & type, InformationCarrier * info
 	{
 		return false;
 	}
-
+	_type = type;
 	switch( type )
 	{
 		case SkillType::Ligtning:
@@ -60,8 +61,7 @@ bool SkillSprite::initWithSkillType( SkillType & type, InformationCarrier * info
 
 			break;
 		case SkillType::Meteor:
-			log( "skill is Meteor" );
-
+			createMeteor( info->getVect( ) );
 			break;
 		case SkillType::Wind:
 			log( "skill is wind" );
@@ -71,26 +71,25 @@ bool SkillSprite::initWithSkillType( SkillType & type, InformationCarrier * info
 			break;
 	}
 
+	auto physic = EventListenerPhysicsContact::create( );
+	physic->onContactBegin = CC_CALLBACK_1( SkillSprite::contact, this );
+	_eventDispatcher->addEventListenerWithSceneGraphPriority( physic, this );
 	return true;
 }
+bool SkillSprite::contact( PhysicsContact & con)
+	{
+		log( "on contact begin ");
+		return false;
+	}
 
-void SkillSprite::setAction( Action * action )
-{
-	if( action )
-	{
-		_action = action;
-	}
-	else
-	{
-		auto move = MoveBy::create( 1.0f, Vec2( 100, 0 ) );
-		_action = Sequence::create( move, CallFunc::create( _callBack ), nullptr );
-	}
-}
 
 void SkillSprite::startSkill( )
 {
+	if( _type == SkillType::Meteor )
+	{
+		return;
+	}
 	setCallBack( );
-	setAction( );
 	this->runAction( _action );
 }
 
@@ -104,4 +103,10 @@ void SkillSprite::setCallBack( std::function<void( )> call )
 	{
 		_callBack = call;
 	}
+}
+
+void SkillSprite::createMeteor( Vec2 * point )
+{
+	
+	this->setPosition( point->x - 70, _director->getVisibleSize( ).height + 5 );
 }

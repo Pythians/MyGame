@@ -1,5 +1,5 @@
-﻿/******************************************************************************
-Copyright( c ) 2015 H·K
+/******************************************************************************
+Copyright( c ) 2015 H�K
 
 http://www.cnblogs.com/pythian
 
@@ -22,21 +22,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ******************************************************************************/
 
-#ifndef GameLayer_H_
-#define GameLayer_H_
+#ifndef Paricle_H_
+#define Paricle_H_
 
 #include "Config.h"
 
-class GameLayer : public cocos2d::Node
+USING_NS_CC;
+
+class MyParicle : public  ParticleSystemQuad
 {
 public:
-	GameLayer( );
-	~GameLayer( );
+	static MyParicle * createFire( );
+	static MyParicle * createMeteor( );
 
-	virtual bool init( );
-	CREATE_FUNC( GameLayer );
+CC_CONSTRUCTOR_ACCESS:
+	MyParicle( );
+	~MyParicle( );
+
+	void setDefaultTexture( );
+
+	bool initFire( );
+	bool initMeteor( );
 private:
-	Node * createCloud( );
+	CC_DISALLOW_COPY_AND_ASSIGN( MyParicle );
 };
+
 
 #endif

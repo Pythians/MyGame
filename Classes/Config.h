@@ -1,10 +1,26 @@
-//
-//  Config.h
-//  Demo
-//
-//  Created by HK on 15/3/17.
-//  Last change by K on 15/4/13
-//
+/******************************************************************************
+Copyright( c ) 2015 H·K
+
+http://www.cnblogs.com/pythian
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files( the "Software" ), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and / or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions :
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+******************************************************************************/
 
 #ifndef Demo_Config_h
 #define Demo_Config_h
@@ -34,6 +50,12 @@ const float TRPERCENTILE = 0.025f;
 const float SKILLDIFFERENTIATE = 0.6f;
 //cocos2d::Size VISIBLESIZE = cocos2d::Size( 0, 0 );
 const cocos2d::Size DESVESSIZE = cocos2d::Size( 960, 640 );
+
+// physics group
+const int PEOPLE = 2;
+const int ROAD = PEOPLE;
+const int SKMETEOR = PEOPLE;
+const int DITMASK = 100;
 
 const Vec2 LINES_0[ ] = {
 	Vec2( DESVESSIZE.width * 0,  DESVESSIZE.height * 0 ),

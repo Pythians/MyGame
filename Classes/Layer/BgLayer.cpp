@@ -17,14 +17,14 @@ bool BgLayer::init( )
 	}
 	arr[ 0 ]->stichingToBottom( );
 	auto d = DrawSp::create( );
-	d->drawVectArrBt( arr[ 0 ] );
+	d->drawSolidVectArrBt( arr[ 0 ] );
 	this->addChild( d );
 	for( int i = 1; i < lines.size( ); i++ )
 	{
 		auto l = arr[ 0 ]->stiching( arr[ i ] );
 		l->stichingToBottom( );
 		auto dl = DrawSp::create( );
-		dl->drawVectArrBt( l );
+		dl->drawSolidVectArrBt( l );
 		this->addChild( dl );
 	}
 

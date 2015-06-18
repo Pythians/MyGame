@@ -1,11 +1,10 @@
 ﻿#include "GameLayer.h"
+#include "Resource/ResourcesManage.h"
+#include "Layer/BgLayer.h"
 
 USING_NS_CC;
 
 GameLayer::GameLayer( )
-	: _bg1( nullptr )
-	, _bg2( nullptr )
-	, _speed( 1.0f )
 {
 }
 
@@ -19,144 +18,61 @@ bool GameLayer::init( )
 	{
 		return false;
 	}
+	this->addChild( LayerColor::create( Color4B( 182, 228, 254, 255 ) ) );
 
-	_bg1 = Sprite::create( );
-	_bg2 = Sprite::create( );
+	auto size = _director->getVisibleSize( );
+	auto cloud = createCloud( );
+	cloud->setScale( 0.6 );
+	cloud->setPosition( size.width * 0.81, size.height * 0.90 );
+	this->addChild( cloud );
+
+	auto cloud1 = createCloud( );
+	cloud1->setScale( 0.5 );
+	cloud1->setPosition( size.width * 0.5, size.height * 0.92 );
+	this->addChild( cloud1 );
+
+	auto cloud2 = createCloud( );
+	cloud2->setScale( 0.4 );
+	cloud2->setPosition( size.width * 0.162, size.height * 0.84 );
+	this->addChild( cloud2 );
+
+	auto res = new ResourcesManage( );
+	auto data = res->getBgLayerDataFromFile( "lines" );
+	auto li = data->getLineLayer( );
+	for( auto l : *li )
+	{
+		this->addChild( BgLayer::create( l ) );
+	}
+	/*for( int i = 0; i < li->size( ); i++ )
+	{
+		auto bg = BgLayer::create( li->at( i ) );
+		this->addChild( bg );
+	}*/
+	res->release( );
 
 	return true;
 }
 
-bool GameLayer::init( const std::string & filename )
+Node * GameLayer::createCloud( )
 {
-	if( !Node::init( ) )
-	{
-		return false;
-	}
+	Color4F color = Color4F( 0.929f, 0.972f, 1.0f, 1.0f );
+	auto circle = DrawNode::create( );
+	circle->drawSolidCircle( Vec2::ZERO, 60.0f, 0.0f, 24, color );
+	circle->setPosition( 0, 0 );
+	auto circle1 = DrawNode::create( );
+	circle1->drawSolidCircle( Vec2::ZERO, 35.0f, 0.0f, 24, color );
+	circle1->setPosition( 50, -15 );
+	auto circle2 = DrawNode::create( );
+	circle2->drawSolidCircle( Vec2::ZERO, 40.0f, 0.0f, 24, color );
+	circle2->setPosition( -50, -10 );
+	auto circle3 = DrawNode::create( );
+	circle3->drawSolidCircle( Vec2::ZERO, 25.0f, 0.0f, 24, color );
+	circle3->setPosition( -80, -22 );
 
-	_bg1 = Sprite::create( filename );
-	_bg2 = Sprite::create( filename );
-	
-	return true;
+	auto cloud = Node::create( );
+	cloud->addChild( circle3 );
+	cloud->addChild( circle2 );
+	cloud->addChild( circle1 );
+	cloud->addChild( circle );
+	return cloud;
 }
-
-bool GameLayer::initWithFrame( cocos2d::SpriteFrame * frame )
-{
-	if( !Node::init( ) )
-	{
-		return false;
-	}
-
-	_bg1 = Sprite::createWithSpriteFrame( frame );
-	_bg2 = Sprite::createWithSpriteFrame( frame );
-
-	return true;
-}
-
-bool GameLayer::initWithFrameName( const std::string & frameName )
-{
-	if( !Node::init( ) )
-	{
-		return false;
-	}
-
-	_bg1 = Sprite::createWithSpriteFrameName( frameName );
-	_bg2 = Sprite::createWithSpriteFrameName( frameName );
-
-	return true;
-}
-
-void GameLayer::update( float delta )
-{
-	auto x1 = _bg1->getPositionX( );
-	auto x2 = _bg2->getPositionX( );
-	auto w = _bg1->getContentSize( ).width;
-	if( -x1 > w )
-	{
-		_bg1->setPosition( x2 + w - 2 - _speed, 0 );
-	}
-	else
-	{
-		_bg1->setPositionX( x1 - _speed );
-	}
-	if( -x2 > w )
-	{
-		_bg2->setPosition( x1 + w - 2 - _speed, 0 );
-	}
-	else
-	{
-		_bg2->setPositionX( x2 - _speed );
-	}
-}
-
-void GameLayer::onEnter( )
-{
-	Node::onEnter( );
-	_bg1->setAnchorPoint( Vec2::ANCHOR_BOTTOM_LEFT );
-	_bg2->setAnchorPoint( Vec2::ANCHOR_BOTTOM_LEFT );
-	_bg1->setPosition( Vec2::ZERO );
-	_bg2->setPosition( _bg1->getContentSize( ).width - 2, 0 );
-    
-	this->addChild( _bg1 );
-	this->addChild( _bg2 );
-	this->scheduleUpdate( );
-}
-
-
-float GameLayer::getSpeed( ) const
-{
-	return _speed;
-}
-
-void GameLayer::setSpeed( float speed )
-{
-	_speed = speed;
-}
-
-GameLayer * GameLayer::create( )
-{
-	auto ret = new ( std::nothrow ) GameLayer( );
-	if( ret && ret->init( ) )
-	{
-		ret->autorelease( );
-		return ret;
-	}
-	delete ret;
-	return nullptr;
-}
-
-GameLayer * GameLayer::create( const std::string & filename )
-{
-	auto ret = new ( std::nothrow ) GameLayer( );
-	if( ret && ret->init( filename ) )
-	{
-		ret->autorelease( );
-		return ret;
-	}
-	delete ret;
-	return nullptr;
-}
-
-GameLayer * GameLayer::createWithFrame( cocos2d::SpriteFrame * frame )
-{
-	auto ret = new ( std::nothrow ) GameLayer( );
-	if( ret && ret->initWithFrame( frame ) )
-	{
-		ret->autorelease( );
-		return ret;
-	}
-	delete ret;
-	return nullptr;
-}
-
-GameLayer * GameLayer::createWithFrameName( const std::string & frameName )
-{
-	auto ret = new ( std::nothrow ) GameLayer( );
-	if( ret && ret->initWithFrameName( frameName ) )
-	{
-		ret->autorelease( );
-		return ret;
-	}
-	delete ret;
-	return nullptr;
-}
-
