@@ -27,8 +27,8 @@ SOFTWARE.
 #define _ManageConter_H_
 
 #include "Config.h"
-#include "Skill.h"
-#include "BusinessLogic.h"
+#include "Layer/Skill/Skill.h"
+#include "BusinessLogic/BusinessLogic.h"
 
 class ManageConter : public Ref
 {
