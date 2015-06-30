@@ -22,7 +22,7 @@ bool GameScene::init( )
 	// 添加到管理中心
 	_manageConter->addNode( LAYER_Touch, touch );
 
-	//this->addChild( GameLayer::create( ) );
+	this->addChild( GameLayer::create( ) );
 
 
 

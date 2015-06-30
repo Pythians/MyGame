@@ -1,4 +1,5 @@
 ﻿#include "BusinessLogic.h"
+#include "BusinessLogic/VectArrProcess.h"
 
 BusinessLogic * BusinessLogic::create( ManageConter * manage )
 {
@@ -65,6 +66,10 @@ void BusinessLogic::receiveMsg( Ref * sender )
 
 void BusinessLogic::skillMeteor( InformationCarrier * info )
 {
+	auto li = VectArr( info->getVect( ) );
+	auto si = VectArr( Bezier( 0, 100, 960, 400, 960, 100, 0, 400 ) );
+	auto po = si.stiching( &li );
+	info->getVect( )->y = po->getLines( )->y;
 	_manage->setSkill( SkillSprite::create( Meteor, info ) );
 }
 

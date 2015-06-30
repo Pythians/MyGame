@@ -47,7 +47,6 @@ bool MyParicle::initFire( )
 
 		// emitter position
 		Size winSize = Director::getInstance( )->getWinSize( );
-		this->setPosition( winSize.width / 2, 60 );
 		_posVar = Vec2( 10, 3 );
 		// life of particles
 		_life = 0.55;
@@ -98,7 +97,7 @@ bool MyParicle::initMeteor( )
 		// Gravity Mode
 		this->_emitterMode = Mode::RADIUS;
 
-		modeB.startRadius = 10.0f;
+		modeB.startRadius = 25.0f;
 		modeB.startRadiusVar = 0.0f;
 		modeB.endRadius = 30.0f;
 		modeB.endRadiusVar = 0.0f;
@@ -111,7 +110,6 @@ bool MyParicle::initMeteor( )
 
 		// emitter position
 		Size winSize = Director::getInstance( )->getWinSize( );
-		this->setPosition( winSize.width / 2, 60 );
 		_posVar = Vec2( 10, 3 );
 		// life of particles
 		_life = 0.5f;

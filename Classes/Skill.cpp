@@ -61,7 +61,7 @@ bool SkillSprite::initWithSkillType( SkillType & type, InformationCarrier * info
 
 			break;
 		case SkillType::Meteor:
-			createMeteor( info->getVect( ) );
+			log( "skill is Meteor" );
 			break;
 		case SkillType::Wind:
 			log( "skill is wind" );
@@ -71,9 +71,6 @@ bool SkillSprite::initWithSkillType( SkillType & type, InformationCarrier * info
 			break;
 	}
 
-	auto physic = EventListenerPhysicsContact::create( );
-	physic->onContactBegin = CC_CALLBACK_1( SkillSprite::contact, this );
-	_eventDispatcher->addEventListenerWithSceneGraphPriority( physic, this );
 	return true;
 }
 bool SkillSprite::contact( PhysicsContact & con)
@@ -85,21 +82,12 @@ bool SkillSprite::contact( PhysicsContact & con)
 
 void SkillSprite::startSkill( )
 {
-	if( _type == SkillType::Meteor )
-	{
-		return;
-	}
-	setCallBack( );
 	this->runAction( _action );
 }
 
 void SkillSprite::setCallBack( std::function<void( )> call )
 {
-	if( call == nullptr )
-	{
-		_callBack = [ this ]( ) { log( "Sprite call back" ); this->removeFromParent( ); };
-	}
-	else
+	if( call != nullptr )
 	{
 		_callBack = call;
 	}
@@ -107,6 +95,9 @@ void SkillSprite::setCallBack( std::function<void( )> call )
 
 void SkillSprite::createMeteor( Vec2 * point )
 {
-	
-	this->setPosition( point->x - 70, _director->getVisibleSize( ).height + 5 );
+	this->addChild( MyParicle::createMeteor( ) );
+	auto size = _director->getVisibleSize( );
+	auto jump = JumpTo::create( 2.0f, *point, 0, 1 );
+	_action = EaseSineIn::create( jump );
+	this->setPosition( point->x - 75, _director->getVisibleSize( ).height );
 }

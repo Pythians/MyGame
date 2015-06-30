@@ -21,6 +21,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ******************************************************************************/
+
+
 #ifndef _VectArrProcess_H_
 #define _VectArrProcess_H_
 
@@ -28,6 +30,7 @@ SOFTWARE.
 #include "Data/Data.h"
 using cocos2d::Vect;
 using cocos2d::Vec4;
+using cocos2d::Director;
 using std::swap;
 
 bool Equal( float x, float y );
@@ -48,6 +51,13 @@ public:
 		, _bottom( 0 )
 	{
 		_lines = new Vect[ count + 2];
+	}
+	VectArr( Vect * point )
+		: _count( 2 )
+	{
+		_lines = new Vect[ _count + 2 ];
+		_lines[ 0 ] = Vect( point->x, 0 );
+		_lines[ 1 ] = Vect( point->x, Director::getInstance( )->getVisibleSize( ).height );
 	}
 	~VectArr( )
 	{

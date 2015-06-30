@@ -58,7 +58,7 @@ void ManageConter::setSkill( SkillSprite * skill )
 {
 	_skill = skill;
 	_node->at( LAYER_BASE )->addChild( skill );
-	skill->startSkill( );
+	//skill->startSkill( );
 }
 
 
