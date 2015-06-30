@@ -27,7 +27,7 @@ SOFTWARE.
 #define _BgLayer_H_
 
 #include "Config.h"
-#include "Layer/DrawSp.h"
+#include "Layer/bg/DrawSp.h"
 
 class BgLayer : public cocos2d::Node
 {

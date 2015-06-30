@@ -1,6 +1,6 @@
 ﻿#include "GameLayer.h"
 #include "Resource/ResourcesManage.h"
-#include "Layer/BgLayer.h"
+#include "Layer/bg/BgLayer.h"
 
 USING_NS_CC;
 
